@@ -28,7 +28,7 @@ public class Rooms {
         }
     }
 
-    //TODO WHEN CALLING STRING ROOM MAKE IT IS LOWER CASED
+    //WHEN CALLING STRING ROOM MAKE IT IS LOWER CASED
 
     public boolean getAvailability(String room) {
         return Rooms.get(room);
