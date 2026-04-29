@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Rooms {
-    private static HashMap<String, Boolean> Rooms = new HashMap<>();
+    private static final HashMap<String, Boolean> Rooms = new HashMap<>();
 
     public Rooms() {
         for (int i = 0; i != 9; i++) {
@@ -14,7 +14,6 @@ public class Rooms {
                 }
             }
         }
-        System.out.println(Rooms);
     }
 
     private static String GetWing(int j) {
@@ -28,6 +27,8 @@ public class Rooms {
             return "n";
         }
     }
+
+    //TODO WHEN CALLING STRING ROOM MAKE IT IS LOWER CASED
 
     public boolean getAvailability(String room) {
         return Rooms.get(room);
