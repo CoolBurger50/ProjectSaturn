@@ -1,3 +1,8 @@
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Scanner;
+
 public class Students {
 
     private static int globalStudentID = 1;
@@ -5,13 +10,28 @@ public class Students {
     private String firstName;
     private String lastName;
     private int gradeLevel;
+    private static ArrayList<Students> allStudents = new ArrayList<Students>();
 
-    public Students(String firstName, String lastName, int gradeLevel){
+    public Students(){
+        for (int i = 0; i < 5000; i++){
+            ArrayList<String> allFirstNames = getFileData("Main/src/first_names.txt");
+            firstName = allFirstNames.get((int)(Math.random() * 1000));
+            ArrayList<String> allLastNames = getFileData("Main/src/last_names.txt");
+            lastName = allLastNames.get((int)(Math.random() * 1000));
+            gradeLevel = (int) (Math.random() * 4) + 9;
+            localStudentID = globalStudentID;
+            globalStudentID++;
+            Students tempStudent = new Students(firstName,lastName,gradeLevel,localStudentID);
+            allStudents.add(tempStudent);
+        }
+        System.out.println(getAllStudents());
+    }
+
+    public Students(String firstName, String lastName, int gradeLevel, int localStudentID){
         this.firstName = firstName;
         this.lastName = lastName;
         this.gradeLevel = gradeLevel;
-        localStudentID = globalStudentID;
-        globalStudentID++;
+        this.localStudentID = localStudentID;
     }
 
     public int getStudentID() {
@@ -30,8 +50,29 @@ public class Students {
         return gradeLevel;
     }
 
+    public static ArrayList<Students> getAllStudents(){
+        return allStudents;
+    }
+
+    public static ArrayList<String> getFileData(String fileName) {
+        ArrayList<String> fileData = new ArrayList<String>();
+        try {
+            File f = new File(fileName);
+            Scanner s = new Scanner(f);
+            while (s.hasNextLine()) {
+                String line = s.nextLine();
+                if (!line.equals(""))
+                    fileData.add(line);
+            }
+            return fileData;
+        }
+        catch (FileNotFoundException e) {
+            return fileData;
+        }
+    }
+
     @Override
     public String toString(){
-        return "INSERT INTO Students (first_name, last_name, grade_level) VALUES ('" + firstName + "', '" + lastName + "', " + gradeLevel + ");";
+        return firstName + " " + localStudentID;
     }
 }

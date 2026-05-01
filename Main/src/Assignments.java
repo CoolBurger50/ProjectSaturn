@@ -1,38 +1,17 @@
 public class Assignments {
 
-    private static int globalGradeID = 1;
-    private int localGradeID;
-    private int assignmentID;
-    private int studentID;
-    private int grade;
+    private static int globalAssignmentID = 1;
+    private int localAssignmentID;
+    private int sectionID;
+    private String assignmentName;
+    private String assignmentType;
 
-    //TODO replace assignmentID with assignment object when the class is coded
-    public Assignments(Students student, int assignmentID, int grade){
-        this.studentID = student.getStudentID();
-        this.assignmentID = assignmentID;
-        this.grade = grade;
-        localGradeID = globalGradeID;
-        globalGradeID++;
-    }
+    public Assignments(int sectionID){
+        String[] assignmentTypes = {"Regents", "Elective", "AP"};
+        this.sectionID = sectionID;
+        assignmentType = assignmentTypes[(int) (Math.random() * 3)];
 
-    public int getGradeID() {
-        return localGradeID;
-    }
-
-    public int getAssignmentID() {
-        return assignmentID;
-    }
-
-    public int getStudentID() {
-        return studentID;
-    }
-
-    public int getGrade() {
-        return grade;
-    }
-
-    @Override
-    public String toString(){
-        return "INSERT INTO Grades (assignment_id, student_id, grade) VALUES (" + assignmentID + ", " + studentID + ", " + grade + ")";
+        localAssignmentID = globalAssignmentID;
+        globalAssignmentID++;
     }
 }

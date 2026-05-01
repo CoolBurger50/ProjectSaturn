@@ -1,7 +1,7 @@
 import java.util.*;
 
 public class Rooms {
-    private static HashMap<String, Boolean> Rooms = new HashMap<>();
+    private final HashMap<String, Boolean> Rooms = new HashMap<>();
 
     public Rooms() {
         for (int i = 0; i != 9; i++) {
@@ -14,7 +14,6 @@ public class Rooms {
                 }
             }
         }
-        System.out.println(Rooms);
     }
 
     private static String GetWing(int j) {
@@ -29,11 +28,31 @@ public class Rooms {
         }
     }
 
+    //WHEN CALLING STRING ROOM MAKE IT IS LOWER CASED
+
     public boolean getAvailability(String room) {
         return Rooms.get(room);
     }
 
     public void setTaken(String room) {
         Rooms.replace(room, false);
+    }
+
+    public String createInserts(){
+        StringBuilder Insert = new StringBuilder();
+
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 5; j++) {
+                for (int n = 0; n < 21; n++) {
+                    String floor = String.valueOf(i);
+                    String wing = GetWing(j);
+                    String room = String.valueOf(n);
+
+                    Insert.append("INSERT INTO Teachers (room_floor, room_wing, room_number) VALUES ('").append(floor).append("', '").append(wing).append("', ").append(room).append(");\n");
+                }
+            }
+        }
+
+        return Insert.toString();
     }
 }
