@@ -12,21 +12,6 @@ public class Students {
     private int gradeLevel;
     private static ArrayList<Students> allStudents = new ArrayList<Students>();
 
-    public Students(){
-        for (int i = 0; i < 5000; i++){
-            ArrayList<String> allFirstNames = getFileData("Main/src/first_names.txt");
-            firstName = allFirstNames.get((int)(Math.random() * 1000));
-            ArrayList<String> allLastNames = getFileData("Main/src/last_names.txt");
-            lastName = allLastNames.get((int)(Math.random() * 1000));
-            gradeLevel = (int) (Math.random() * 4) + 9;
-            localStudentID = globalStudentID;
-            globalStudentID++;
-            Students tempStudent = new Students(firstName,lastName,gradeLevel,localStudentID);
-            allStudents.add(tempStudent);
-        }
-        System.out.println(getAllStudents());
-    }
-
     public Students(String firstName, String lastName, int gradeLevel, int localStudentID){
         this.firstName = firstName;
         this.lastName = lastName;
@@ -54,6 +39,20 @@ public class Students {
         return allStudents;
     }
 
+    public static void makeStudents(int amount){
+        for (int i = 0; i < amount; i++){
+            ArrayList<String> allFirstNames = getFileData("Main/Names/student_first_names.txt");
+            String firstName = allFirstNames.get((int)(Math.random() * 1000));
+            ArrayList<String> allLastNames = getFileData("Main/Names/student_last_names.txt");
+            String lastName = allLastNames.get((int)(Math.random() * 1000));
+            int gradeLevel = (int) (Math.random() * 4) + 9;
+            int localStudentID = globalStudentID;
+            globalStudentID++;
+            Students tempStudent = new Students(firstName,lastName,gradeLevel,localStudentID);
+            allStudents.add(tempStudent);
+        }
+    }
+
     public static ArrayList<String> getFileData(String fileName) {
         ArrayList<String> fileData = new ArrayList<String>();
         try {
@@ -73,6 +72,6 @@ public class Students {
 
     @Override
     public String toString(){
-        return firstName + " " + localStudentID;
+        return firstName + " " + lastName + " " + localStudentID;
     }
 }

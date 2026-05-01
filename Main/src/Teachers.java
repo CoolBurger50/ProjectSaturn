@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Teachers {
+
     private String firstName;
     private String lastName;
     private static int counter = 1;
