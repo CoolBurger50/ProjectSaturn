@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class Rooms {
     private int Floor;
@@ -6,77 +7,106 @@ public class Rooms {
     private int Room;
     private static int counter = 1;
     private int RoomID;
-    private final HashMap<Rooms, Boolean> Rooms = new HashMap<>();
+    private static final HashMap<Rooms, Boolean> allRooms = new LinkedHashMap<>();
 
     // Constructor Method
     public Rooms(int Floor, String Wing, int Room) {
-        Floor = this.Floor;
-        Wing = this.Wing;
-        Room = this.Room;
+        this.Floor = Floor;
+        this.Wing = Wing;
+        this.Room = Room;
         RoomID = counter++;
     }
 
     // Getter Methods
-    public int getFloor() {return Floor;}
-
-    public String getWing() {return Wing;}
-
-    public int getRoom() {return Room;}
-
-    public static HashMap<Rooms, Boolean> getAllTeachers() {
-        return Rooms;
+    public int getFloor() {
+        return Floor;
     }
 
-    public G() {
-        for (int i = 0; i != 9; i++) {
-            for (int j = 0; j != 5; j++) {
-                for (int n = 0; n != 21; n++) {
-                    String Floor = String.valueOf(i);
-                    String Wing = GetWing(j);
-                    String Room = String.valueOf(n);
-                    Rooms.put(Floor + Wing + Room, true);
+    public String getWing() {
+        return Wing;
+    }
+
+    public int getRoom() {
+        return Room;
+    }
+
+    public int getRoomID() {
+        return RoomID;
+    }
+
+    public static HashMap<Rooms, Boolean> getAllRooms() {
+        return allRooms;
+    }
+
+    // Hashmap Generation
+    public static void generateRooms() {
+        for (int i = 0; i <= 8; i++) {
+            for (int j = 0; j <= 3; j++) {
+                for (int n = 1; n <= 20; n++) {
+                    Rooms currentRoom = new Rooms(i,getWing(j),n);
+                    allRooms.put(currentRoom, true);
                 }
             }
         }
     }
 
-    private static String GetWing(int j) {
-        if (j ==1 ) {
-            return "w";
+    // Convert Int -> Wing
+    private static String getWing(int j) {
+        if (j == 0) {
+            return "n";
+        } else if (j == 1) {
+            return "e";
         } else if (j == 2) {
             return "s";
-        } else if (j == 3) {
-            return "e";
         } else {
-            return "n";
+            return "w";
         }
     }
 
-    //WHEN CALLING STRING ROOM MAKE IT IS LOWER CASED
-
-    public boolean getAvailability(String room) {
-        return Rooms.get(room);
+    // Object -> ID translation
+    public Rooms fromRoomID(int roomID) {
+        for (Rooms room : allRooms.keySet()) {
+            if (room.getRoomID() == roomID) {
+                return room;
+            }
+        }
+        return null;
     }
 
-    public void setTaken(String room) {
-        Rooms.replace(room, false);
-    }
+    // Check HashMap value for said roomID
+    public boolean checkAvailability (int roomID) {return allRooms.get(fromRoomID(roomID));}
 
-    public String createInserts(){
-        StringBuilder Insert = new StringBuilder();
+    // Set the value for said Teacher ID to false
+    public void setTaken (int roomID) {allRooms.replace(fromRoomID(roomID), false);}
 
-        for (int i = 0; i < 9; i++) {
-            for (int j = 0; j < 5; j++) {
-                for (int n = 0; n < 21; n++) {
-                    String floor = String.valueOf(i);
-                    String wing = GetWing(j);
-                    String room = String.valueOf(n);
+    // Creates Inserts Statements
+    public static String createInserts() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("INSERT INTO Rooms (room_floor, room_wing, room_number) VALUES\n");
 
-                    Insert.append("INSERT INTO Teachers (room_floor, room_wing, room_number) VALUES ('").append(floor).append("', '").append(wing).append("', ").append(room).append(");\n");
-                }
+        int count = 0;
+        int total = allRooms.size();
+
+        for (Rooms room : allRooms.keySet()) {
+            sb.append("('")
+                    .append(room.getFloor()).append("', '")
+                    .append(room.getWing()).append("', ")
+                    .append(room.getRoom()).append(")");
+
+            count++;
+            if (count < total) {
+                sb.append(",\n");
+            } else {
+                sb.append(";");
             }
         }
 
-        return Insert.toString();
+        return sb.toString();
+    }
+
+    // Used for testing
+    @Override
+    public String toString() {
+        return "\n\n" + Floor+Wing+Room + "\nRoomID:" + RoomID + "\nAvailability";
     }
 }

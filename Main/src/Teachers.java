@@ -1,5 +1,10 @@
-import java.util.*;
-import java.io.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Scanner;
+
+import java.io.File;
+import java.io.FileNotFoundException;
 
 public class Teachers {
     private final String firstName;
@@ -7,7 +12,7 @@ public class Teachers {
     private static int counter = 1;
     private final int teacherID;
     private final int departmentID;
-    private static final HashMap<Teachers, Boolean> allTeachers = new HashMap<>();
+    private static final HashMap<Teachers, Boolean> allTeachers = new LinkedHashMap<>();
 
     // Constructor Method
     public Teachers (String firstName, String lastName, int departmentID){
@@ -40,30 +45,29 @@ public class Teachers {
 
     // Hashmap Generation
     public static void generateTeachers() {
-        String basePath = "Main/Names/";
+        String basePath = "Main/Files/";
 
         String[] subjects = {"bio", "chem", "cte", "english", "health_pe", "math", "physics", "social_studies", "special_education", "visual_art", "world_language"};
 
         for (int i = 0; i < subjects.length; i++) {
             String path = basePath + subjects[i] + "_teachers.txt";
             ArrayList<String> teachersList = getFileData(path);
-
             for (String current : teachersList) {
                 String[] parts = current.split(" ");
                 String first_name = parts[0];
                 String last_name = parts[1];
 
-                Teachers t = new Teachers(first_name, last_name, i + 1);
-                allTeachers.put(t, true);
+                Teachers currentTeacher = new Teachers(first_name, last_name, i + 1);
+                allTeachers.put(currentTeacher, true);
             }
         }
     }
 
-    // Object-ID translation
+    // Object -> ID translation
     public Teachers fromTeacherID(int teacherID) {
-        for (Teachers teachers : allTeachers.keySet()) {
-            if (teachers.getTeacherID() == teacherID) {
-                return teachers;
+        for (Teachers teacher : allTeachers.keySet()) {
+            if (teacher.getTeacherID() == teacherID) {
+                return teacher;
             }
         }
         return null;
@@ -74,6 +78,31 @@ public class Teachers {
 
     // Set the value for said Teacher ID to false
     public void setTaken (int teacherID) {allTeachers.replace(fromTeacherID(teacherID), false);}
+
+    // Creates Inserts Statements
+    public static String createInserts() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("INSERT INTO Teachers (first_name, last_name, department_id) VALUES\n");
+
+        int count = 0;
+        int total = allTeachers.size();
+
+        for (Teachers teacher : allTeachers.keySet()) {
+            sb.append("('")
+                    .append(teacher.getFirstName()).append("', '")
+                    .append(teacher.getLastName()).append("', ")
+                    .append(teacher.getDepartmentID()).append(")");
+
+            count++;
+            if (count < total) {
+                sb.append(",\n");
+            } else {
+                sb.append(";");
+            }
+        }
+
+        return sb.toString();
+    }
 
     // Simple getFileData Method
     private static ArrayList<String> getFileData(String fileName) {
@@ -91,5 +120,11 @@ public class Teachers {
         catch (FileNotFoundException e) {
             return fileData;
         }
+    }
+
+    // Used for testing
+    @Override
+    public String toString() {
+        return "\n\nName: " + firstName + lastName + "\nTeacherID: " + teacherID + "\nDepartID: " + departmentID + "\nAvailability";
     }
 }

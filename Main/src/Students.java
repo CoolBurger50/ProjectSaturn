@@ -1,26 +1,29 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 public class Students {
+    private final String firstName;
+    private final String lastName;
+    private final int gradeLevel;
+    private static int counter = 1;
+    private final int studentID;
+    private static final HashMap<Students, Boolean> allStudents = new LinkedHashMap<>();
 
-    private static int globalStudentID = 1;
-    private int localStudentID;
-    private String firstName;
-    private String lastName;
-    private int gradeLevel;
-    private static ArrayList<Students> allStudents = new ArrayList<Students>();
-
-    public Students(String firstName, String lastName, int gradeLevel, int localStudentID){
+    // Constructor Method
+    public Students(String firstName, String lastName, int gradeLevel){
         this.firstName = firstName;
         this.lastName = lastName;
         this.gradeLevel = gradeLevel;
-        this.localStudentID = localStudentID;
+        studentID = counter++;
     }
 
+    // Getter Methods
     public int getStudentID() {
-        return localStudentID;
+        return studentID;
     }
 
     public String getFirstName() {
@@ -35,24 +38,31 @@ public class Students {
         return gradeLevel;
     }
 
-    public static ArrayList<Students> getAllStudents(){
+    public static HashMap<Students, Boolean> getAllStudents(){
         return allStudents;
     }
 
-    public static void makeStudents(int amount){
-        for (int i = 0; i < amount; i++){
-            ArrayList<String> allFirstNames = getFileData("Main/Names/student_first_names.txt");
-            String firstName = allFirstNames.get((int)(Math.random() * 1000));
-            ArrayList<String> allLastNames = getFileData("Main/Names/student_last_names.txt");
-            String lastName = allLastNames.get((int)(Math.random() * 1000));
+    // Hashmap Generation
+    public static void generateStudents(int amount) {
+        String basePath = "Main/Files/";
+
+        String firstNamePath = basePath + "student_first_names.txt";
+        String lastNamePath = basePath + "student_last_names.txt";
+
+        ArrayList<String> allFirstNames = getFileData(firstNamePath);
+        ArrayList<String> allLastNames = getFileData(lastNamePath);
+
+        for (int i = 0; i < amount; i++) {
+            String firstName = allFirstNames.get((int)(Math.random() * allFirstNames.size()));
+            String lastName = allLastNames.get((int)(Math.random() * allLastNames.size()));
             int gradeLevel = (int) (Math.random() * 4) + 9;
-            int localStudentID = globalStudentID;
-            globalStudentID++;
-            Students tempStudent = new Students(firstName,lastName,gradeLevel,localStudentID);
-            allStudents.add(tempStudent);
+
+            Students currentStudent = new Students(firstName, lastName, gradeLevel);
+            allStudents.put(currentStudent, true);
         }
     }
 
+    // Simple getFileData Method
     public static ArrayList<String> getFileData(String fileName) {
         ArrayList<String> fileData = new ArrayList<String>();
         try {
@@ -70,8 +80,9 @@ public class Students {
         }
     }
 
+    // Used for testing
     @Override
     public String toString(){
-        return firstName + " " + lastName + " " + localStudentID;
+        return "\n\nName: " + firstName + lastName + "\nStudentID: " + studentID + "\nGradeLevel: " + gradeLevel + "\nAvailability";
     }
 }
