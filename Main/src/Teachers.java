@@ -50,7 +50,7 @@ public class Teachers {
         String[] subjects = {"bio", "chem", "cte", "english", "health_pe", "math", "physics", "social_studies", "special_education", "visual_art", "world_language"};
 
         for (int i = 0; i < subjects.length; i++) {
-            String path = basePath + subjects[i] + "_teachers.txt";
+            String path = basePath + subjects[i] + "/teachers.txt";
             ArrayList<String> teachersList = getFileData(path);
             for (String current : teachersList) {
                 String[] parts = current.split(" ");
