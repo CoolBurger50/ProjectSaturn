@@ -2,36 +2,33 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 
 public class Rooms {
-    private int Floor;
-    private String Wing;
-    private int Room;
+    private int floor;
+    private String wing;
+    private int room;
     private static int counter = 1;
-    private int RoomID;
+    private final int roomID;
     private static final HashMap<Rooms, Boolean> allRooms = new LinkedHashMap<>();
 
     // Constructor Method
     public Rooms(int Floor, String Wing, int Room) {
-        this.Floor = Floor;
-        this.Wing = Wing;
-        this.Room = Room;
-        RoomID = counter++;
+        roomID = counter++;
     }
 
     // Getter Methods
     public int getFloor() {
-        return Floor;
+        return floor;
     }
 
     public String getWing() {
-        return Wing;
+        return wing;
     }
 
     public int getRoom() {
-        return Room;
+        return room;
     }
 
     public int getRoomID() {
-        return RoomID;
+        return roomID;
     }
 
     public static HashMap<Rooms, Boolean> getAllRooms() {
@@ -76,8 +73,15 @@ public class Rooms {
     // Check HashMap value for said roomID
     public boolean checkAvailability (int roomID) {return allRooms.get(fromRoomID(roomID));}
 
-    // Set the value for said Teacher ID to false
+    // Set the value for said Room ID to false
     public void setTaken (int roomID) {allRooms.replace(fromRoomID(roomID), false);}
+
+    // Reset all values in HashMap
+    public void resetValues() {
+        for (Rooms room : allRooms.keySet()) {
+            allRooms.replace(room, true);
+        }
+    }
 
     // Creates Inserts Statements
     public static String createInserts() {
@@ -107,6 +111,6 @@ public class Rooms {
     // Used for testing
     @Override
     public String toString() {
-        return "\n\n" + Floor+Wing+Room + "\nRoomID:" + RoomID + "\nAvailability";
+        return "\n\n" + floor+wing+room + "\nRoomID:" + roomID + "\nAvailability";
     }
 }

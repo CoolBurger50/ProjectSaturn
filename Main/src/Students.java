@@ -11,7 +11,7 @@ public class Students {
     private final int gradeLevel;
     private static int counter = 1;
     private final int studentID;
-    private static final HashMap<Students, Boolean> allStudents = new LinkedHashMap<>();
+    private static final ArrayList<Students> allStudents = new ArrayList<>();
 
     // Constructor Method
     public Students(String firstName, String lastName, int gradeLevel){
@@ -38,8 +38,12 @@ public class Students {
         return gradeLevel;
     }
 
-    public static HashMap<Students, Boolean> getAllStudents(){
+    public static ArrayList<Students> getAllStudents(){
         return allStudents;
+    }
+
+    public static int getTotalNumberOfStudents() {
+        return allStudents.size();
     }
 
     // Hashmap Generation
@@ -58,7 +62,7 @@ public class Students {
             int gradeLevel = (int) (Math.random() * 4) + 9;
 
             Students currentStudent = new Students(firstName, lastName, gradeLevel);
-            allStudents.put(currentStudent, true);
+            allStudents.add(currentStudent);
         }
     }
 
@@ -83,6 +87,6 @@ public class Students {
     // Used for testing
     @Override
     public String toString(){
-        return "\n\nName: " + firstName + lastName + "\nStudentID: " + studentID + "\nGradeLevel: " + gradeLevel + "\nAvailability";
+        return "\n\nName: " + firstName + " " + lastName + "\nStudentID: " + studentID + "\nGradeLevel: " + gradeLevel + "\nAvailability";
     }
 }
