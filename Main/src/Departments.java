@@ -22,6 +22,10 @@ public class Departments {
         return 0;
     }
 
+    public static ArrayList<Departments> getAllDepartments() {
+        return allDepartments;
+    }
+
     // Arraylist Generation
     public static void generateDepartments() {
         String[] subjects = {"bio", "chem", "cte", "english", "health_pe", "math", "physics", "social_studies", "special_education", "visual_art", "world_language"};

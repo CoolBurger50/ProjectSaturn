@@ -1,8 +1,5 @@
 import java.util.*;
 
-///  REWORKING SOON
-///  ADD COMMENTS
-
 public class Sections {
     private Teachers teacher;
     private Rooms room;
@@ -17,10 +14,25 @@ public class Sections {
         sectionID=counter++;
     }
 
+    // Getter Methods
+    public int getSectionID() {
+        return sectionID;
+    }
+
     // Arraylist Generation
     public static void generateSections() {
-        for (int i = 0; i < Enrollments.getAllEnrollments().size(); i++) {
-//            COURSES MUST BE COMPLETED FIRST
+        int numOfCourses = Courses.getAllCourses().size();
+        int numOfEnrollments = Enrollments.getAllEnrollments().size();
+        int numOfSectionsPerCourse = numOfCourses/numOfEnrollments;
+        int leftoverSections = numOfCourses%numOfEnrollments;
+
+        // for each period in enrollments
+        for (ArrayList<Enrollments> enrollments: Enrollments.getAllEnrollments()) {
+            // for each class in enrollments
+            for (Enrollments enrollment : enrollments) {
+
+            }
         }
     }
+
 }

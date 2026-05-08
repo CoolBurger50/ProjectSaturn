@@ -21,10 +21,6 @@ public class Enrollments extends ArrayList<Enrollments> {
         return allEnrollments;
     }
 
-    public static int getEnrollmentSize() {
-        return allEnrollments.getFirst().size();
-    }
-
     // Arraylist Generation
     public static void generateEnrollments(int amount) {
         for (int i = 0; i < 10; i++) {
@@ -49,6 +45,6 @@ public class Enrollments extends ArrayList<Enrollments> {
     // Used for testing
     @Override
     public String toString() {
-        return "\n\nEnrollmentID: " + enrollmentID + "\nNumber of Students:" + (getEnrollmentSize());
+        return "\n\nEnrollmentID: " + enrollmentID + "\nNumber of Students:" + (studentsEnrolled.size());
     }
 }
