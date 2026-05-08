@@ -1,11 +1,5 @@
-import java.security.AllPermission;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Scanner;
-
-import java.io.File;
-import java.io.FileNotFoundException;
+import java.util.*;
+import java.io.*;
 
 public class Teachers {
     private final String firstName;
@@ -13,7 +7,7 @@ public class Teachers {
     private static int counter = 1;
     private final int teacherID;
     private final int departmentID;
-    private static final HashMap<Teachers, Boolean> allTeachers = new LinkedHashMap<>();
+    private static final ArrayList<Teachers> allTeachers = new ArrayList<>();
 
     // Constructor Method
     public Teachers (String firstName, String lastName, int departmentID){
@@ -40,45 +34,30 @@ public class Teachers {
         return firstName;
     }
 
-    public static HashMap<Teachers, Boolean> getAllTeachers() {
+    public static ArrayList<Teachers> getAllTeachers() {
         return allTeachers;
     }
 
-    // Hashmap Generation
+    // Arraylist Generation
     public static void generateTeachers() {
         String basePath = "Main/Files/";
 
         String[] subjects = {"bio", "chem", "cte", "english", "health_pe", "math", "physics", "social_studies", "special_education", "visual_art", "world_language"};
 
-        for (int i = 0; i < subjects.length; i++) {
-            String path = basePath + subjects[i] + "/teachers.txt";
+        for (String subject : subjects) {
+            int departmentID = Departments.getDepartmentID(subject);
+            String path = basePath + subject + "/teachers.txt";
             ArrayList<String> teachersList = getFileData(path);
             for (String current : teachersList) {
                 String[] parts = current.split(" ");
                 String first_name = parts[0];
                 String last_name = parts[1];
 
-                Teachers currentTeacher = new Teachers(first_name, last_name, i + 1);
-                allTeachers.put(currentTeacher, true);
+                Teachers currentTeacher = new Teachers(first_name, last_name, departmentID);
+                allTeachers.add(currentTeacher);
             }
         }
     }
-
-    // Object -> ID translation
-    public Teachers fromTeacherID(int teacherID) {
-        for (Teachers teacher : allTeachers.keySet()) {
-            if (teacher.getTeacherID() == teacherID) {
-                return teacher;
-            }
-        }
-        return null;
-    }
-
-    // Check HashMap value for said teacherID
-    public boolean checkAvailability (int teacherID) {return allTeachers.get(fromTeacherID(teacherID));}
-
-    // Set the value for said Teacher ID to false
-    public void setTaken (int teacherID) {allTeachers.replace(fromTeacherID(teacherID), false);}
 
     // Creates Inserts Statements
     public static String createInserts() {
@@ -88,7 +67,7 @@ public class Teachers {
         int count = 0;
         int total = allTeachers.size();
 
-        for (Teachers teacher : allTeachers.keySet()) {
+        for (Teachers teacher : allTeachers) {
             sb.append("('")
                     .append(teacher.getFirstName()).append("', '")
                     .append(teacher.getLastName()).append("', ")
@@ -126,6 +105,6 @@ public class Teachers {
     // Used for testing
     @Override
     public String toString() {
-        return "\n\nName: " + firstName + lastName + "\nTeacherID: " + teacherID + "\nDepartID: " + departmentID + "\nAvailability";
+        return "\n\nName: " + firstName + lastName + "\nTeacherID: " + teacherID + "\nDeptID: " + departmentID + "\n";
     }
 }

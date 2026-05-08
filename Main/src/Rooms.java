@@ -1,5 +1,4 @@
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
 
 public class Rooms {
     private int floor;
@@ -7,7 +6,7 @@ public class Rooms {
     private int room;
     private static int counter = 1;
     private final int roomID;
-    private static final HashMap<Rooms, Boolean> allRooms = new LinkedHashMap<>();
+    private static final ArrayList<Rooms> allRooms = new ArrayList<>();
 
     // Constructor Method
     public Rooms(int Floor, String Wing, int Room) {
@@ -31,17 +30,17 @@ public class Rooms {
         return roomID;
     }
 
-    public static HashMap<Rooms, Boolean> getAllRooms() {
+    public static ArrayList<Rooms> getAllRooms() {
         return allRooms;
     }
 
-    // Hashmap Generation
+    // Arraylist Generation
     public static void generateRooms() {
         for (int i = 0; i <= 8; i++) {
             for (int j = 0; j <= 3; j++) {
                 for (int n = 1; n <= 20; n++) {
                     Rooms currentRoom = new Rooms(i,getWing(j),n);
-                    allRooms.put(currentRoom, true);
+                    allRooms.add(currentRoom);
                 }
             }
         }
@@ -60,29 +59,6 @@ public class Rooms {
         }
     }
 
-    // Object -> ID translation
-    public Rooms fromRoomID(int roomID) {
-        for (Rooms room : allRooms.keySet()) {
-            if (room.getRoomID() == roomID) {
-                return room;
-            }
-        }
-        return null;
-    }
-
-    // Check HashMap value for said roomID
-    public boolean checkAvailability (int roomID) {return allRooms.get(fromRoomID(roomID));}
-
-    // Set the value for said Room ID to false
-    public void setTaken (int roomID) {allRooms.replace(fromRoomID(roomID), false);}
-
-    // Reset all values in HashMap
-    public void resetValues() {
-        for (Rooms room : allRooms.keySet()) {
-            allRooms.replace(room, true);
-        }
-    }
-
     // Creates Inserts Statements
     public static String createInserts() {
         StringBuilder sb = new StringBuilder();
@@ -91,7 +67,7 @@ public class Rooms {
         int count = 0;
         int total = allRooms.size();
 
-        for (Rooms room : allRooms.keySet()) {
+        for (Rooms room : allRooms) {
             sb.append("('")
                     .append(room.getFloor()).append("', '")
                     .append(room.getWing()).append("', ")
@@ -104,13 +80,12 @@ public class Rooms {
                 sb.append(";");
             }
         }
-
         return sb.toString();
     }
 
     // Used for testing
     @Override
     public String toString() {
-        return "\n\n" + floor+wing+room + "\nRoomID:" + roomID + "\nAvailability";
+        return "\n" + floor+wing+room + "\nRoomID:" + roomID + "\n";
     }
 }
