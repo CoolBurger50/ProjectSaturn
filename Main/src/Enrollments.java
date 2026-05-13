@@ -26,7 +26,8 @@ public class Enrollments extends ArrayList<Enrollments> {
     }
 
     // Arraylist Generation
-    public static void generateEnrollments(int amount) {
+    public static void generateEnrollments() {
+        int amount = Students.getAllStudents().size()/Teachers.getAllTeachers().size();
         for (int i = 0; i < 10; i++) {
             ArrayList<Enrollments> enrollments = new ArrayList<>();
             ArrayList<Students> allStudents = new ArrayList<>(Students.getAllStudents());

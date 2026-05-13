@@ -42,7 +42,7 @@ public class Teachers {
     public static void generateTeachers() {
         String basePath = "Main/Files/";
 
-        String[] subjects = {"bio", "chem", "cte", "english", "health_pe", "math", "physics", "social_studies", "special_education", "visual_art", "world_language"};
+        String[] subjects = {"bio", "chem", "cte", "english", "health_pe", "math", "physics", "social_studies", "world_language"};
 
         for (String subject : subjects) {
             int departmentID = Departments.getDepartmentID(subject);
