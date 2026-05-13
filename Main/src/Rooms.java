@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -7,7 +8,7 @@ public class Rooms {
     private int room;
     private static int counter = 1;
     private final int roomID;
-    private static final HashMap<Rooms, Boolean> allRooms = new LinkedHashMap<>();
+    private static final ArrayList<Rooms> allRooms = new ArrayList<>();
 
     // Constructor Method
     public Rooms(int Floor, String Wing, int Room) {
@@ -31,7 +32,7 @@ public class Rooms {
         return roomID;
     }
 
-    public static HashMap<Rooms, Boolean> getAllRooms() {
+    public static ArrayList<Rooms> getAllRooms() {
         return allRooms;
     }
 
@@ -41,7 +42,7 @@ public class Rooms {
             for (int j = 0; j <= 3; j++) {
                 for (int n = 1; n <= 20; n++) {
                     Rooms currentRoom = new Rooms(i,getWing(j),n);
-                    allRooms.put(currentRoom, true);
+                    allRooms.add(currentRoom);
                 }
             }
         }
@@ -62,7 +63,7 @@ public class Rooms {
 
     // Object -> ID translation
     public Rooms fromRoomID(int roomID) {
-        for (Rooms room : allRooms.keySet()) {
+        for (Rooms room : allRooms) {
             if (room.getRoomID() == roomID) {
                 return room;
             }

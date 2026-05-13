@@ -1,4 +1,3 @@
-import javax.xml.stream.events.EndDocument;
 import java.util.*;
 
 public class Enrollments extends ArrayList<Enrollments> {
@@ -23,7 +22,7 @@ public class Enrollments extends ArrayList<Enrollments> {
     }
 
     public static int getEnrollmentSize() {
-        return allEnrollments.getFirst().size();
+        return allEnrollments.get(0).size();
     }
 
     // Arraylist Generation
