@@ -8,16 +8,14 @@ import java.util.Scanner;
 public class Students {
     private final String firstName;
     private final String lastName;
-    private final int gradeLevel;
     private static int counter = 1;
     private final int studentID;
     private static final ArrayList<Students> allStudents = new ArrayList<>();
 
     // Constructor Method
-    public Students(String firstName, String lastName, int gradeLevel){
+    public Students(String firstName, String lastName){
         this.firstName = firstName;
         this.lastName = lastName;
-        this.gradeLevel = gradeLevel;
         studentID = counter++;
     }
 
@@ -34,24 +32,16 @@ public class Students {
         return lastName;
     }
 
-    public int getGradeLevel() {
-        return gradeLevel;
-    }
-
     public static ArrayList<Students> getAllStudents(){
         return allStudents;
     }
 
-    public static int getTotalNumberOfStudents() {
-        return allStudents.size();
-    }
-
-    // Hashmap Generation
+    // ArrayList Generation
     public static void generateStudents(int amount) {
-        String basePath = "Main/Files/";
+        String basePath = "Main/Files/student";
 
-        String firstNamePath = basePath + "student_first_names.txt";
-        String lastNamePath = basePath + "student_last_names.txt";
+        String firstNamePath = basePath + "/student_first_names.txt";
+        String lastNamePath = basePath + "/student_last_names.txt";
 
         ArrayList<String> allFirstNames = getFileData(firstNamePath);
         ArrayList<String> allLastNames = getFileData(lastNamePath);
@@ -59,9 +49,8 @@ public class Students {
         for (int i = 0; i < amount; i++) {
             String firstName = allFirstNames.get((int)(Math.random() * allFirstNames.size()));
             String lastName = allLastNames.get((int)(Math.random() * allLastNames.size()));
-            int gradeLevel = (int) (Math.random() * 4) + 9;
 
-            Students currentStudent = new Students(firstName, lastName, gradeLevel);
+            Students currentStudent = new Students(firstName, lastName);
             allStudents.add(currentStudent);
         }
     }
@@ -87,6 +76,6 @@ public class Students {
     // Used for testing
     @Override
     public String toString(){
-        return "\n\nName: " + firstName + " " + lastName + "\nStudentID: " + studentID + "\nGradeLevel: " + gradeLevel + "\nAvailability";
+        return "\nName: " + firstName + " " + lastName + "\nStudentID: " + studentID + "\n";
     }
 }

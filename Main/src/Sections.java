@@ -1,40 +1,38 @@
-
+import java.util.*;
 
 public class Sections {
+    private Teachers teacher;
+    private Rooms room;
+    private Enrollments enrollment;
+    private Courses course;
+    private final int sectionID;
+    private static int counter = 1;
+    private static final ArrayList<Rooms> allRooms = new ArrayList<>();
 
-    private static int globalSectionID = 1;
-    private int localSectionID;
-    private int courseID;
-    private int roomID;
-    private int teacherID;
-    private int periodNumber;
-
-    public Sections(int courseID, int roomID, int teacherID, int periodNumber){
-        this.courseID = courseID;
-        this.roomID = roomID;
-        this.teacherID = teacherID;
-        this.periodNumber = periodNumber;
-        this.localSectionID = globalSectionID;
-        globalSectionID++;
+    // Constructor Method
+    public Sections(Teachers teacher, Rooms room, Enrollments enrollment, Courses course){
+        sectionID=counter++;
     }
 
+    // Getter Methods
     public int getSectionID() {
-        return localSectionID;
+        return sectionID;
     }
 
-    public int getCourseID() {
-        return courseID;
+    // Arraylist Generation
+    public static void generateSections() {
+        int numOfCourses = Courses.getAllCourses().size();
+        int numOfEnrollments = Enrollments.getAllEnrollments().size();
+        int numOfSectionsPerCourse = numOfCourses/numOfEnrollments;
+        int leftoverSections = numOfCourses%numOfEnrollments;
+
+        // for each period in enrollments
+        for (ArrayList<Enrollments> enrollments: Enrollments.getAllEnrollments()) {
+            // for each class in enrollments
+            for (Enrollments enrollment : enrollments) {
+
+            }
+        }
     }
 
-    public int getRoomID() {
-        return roomID;
-    }
-
-    public int getTeacherID() {
-        return teacherID;
-    }
-
-    public int getPeriodNumber() {
-        return periodNumber;
-    }
 }

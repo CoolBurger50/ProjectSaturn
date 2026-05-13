@@ -1,21 +1,48 @@
+import java.util.*;
+
 public class Departments {
-    private String departmentName;
+    private final String departmentName;
     private static int counter = 1;
-    private int departmentID;
+    private final int departmentID;
+    private static final ArrayList<Departments> allDepartments = new ArrayList<>();
+
+    // Constructor Method
     public Departments (String departmentName){
         this.departmentName = departmentName;
         departmentID = counter++;
     }
 
-    public int getDepartmentID() {
-        return departmentID;
+    // Getter Methods
+    public static int getDepartmentID(String departmentName) {
+        for (Departments department : allDepartments) {
+            if (department.departmentName.equals(departmentName)) {
+                return department.departmentID;
+            }
+        }
+        return 0;
     }
 
-    public String getDepartmentName() {
-        return departmentName;
+    public static ArrayList<Departments> getAllDepartments() {
+        return allDepartments;
     }
+
+    // Arraylist Generation
+    public static void generateDepartments() {
+        String[] subjects = {"bio", "chem", "cte", "english", "health_pe", "math", "physics", "social_studies", "special_education", "visual_art", "world_language"};
+        for (String department : subjects) {
+            Departments currentDepartment = new Departments(department);
+            allDepartments.add(currentDepartment);
+        }
+    }
+
+    // Creates Inserts Statements [NOT COMPLETE] [TOBE EDITED]
+    public static String createInserts() {
+        return null;
+    }
+
+    // Used for testing
     @Override
-    public String toString (){
-        return "INSERT INTO Departments (department_name) VALUES " + getDepartmentName() + ";";
+    public String toString(){
+        return "\nName: " + departmentName + "\nDeptID: " + departmentID + "\n";
     }
 }
