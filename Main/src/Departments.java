@@ -54,10 +54,4 @@ public class Departments {
 
         return sb.toString();
     }
-
-    // Used for testing
-    @Override
-    public String toString(){
-        return "\nName: " + departmentName + "\nDeptID: " + departmentID + "\n";
-    }
 }

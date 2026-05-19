@@ -101,10 +101,4 @@ public class Teachers {
             return fileData;
         }
     }
-
-    // Used for testing
-    @Override
-    public String toString() {
-        return teacherID + "";
-    }
 }

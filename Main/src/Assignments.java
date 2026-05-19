@@ -96,9 +96,4 @@ public class Assignments {
 
         return sb.toString();
     }
-
-    @Override
-    public String toString() {
-        return assignmentID+"";
-    }
 }

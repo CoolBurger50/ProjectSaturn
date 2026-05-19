@@ -74,9 +74,4 @@ public class Sections {
         }
         return sb.toString();
     }
-
-    @Override
-    public String toString() {
-        return "\nSectionID: "+sectionID+ "\nTeacher: "+teacher+ "\nRoom: "+room+ "\nEnrollment: "+enrollment+ "\nCourse: "+course;
-    }
 }

@@ -89,10 +89,4 @@ public class Students {
             return fileData;
         }
     }
-
-    // Used for testing
-    @Override
-    public String toString(){
-        return "\nName: " + firstName + " " + lastName + "\nStudentID: " + studentID + "\n";
-    }
 }

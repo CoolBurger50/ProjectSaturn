@@ -68,12 +68,4 @@ public class Grades {
 
         return sb.toString();
     }
-
-    @Override
-    public String toString() {
-        return "GradeID:"+gradeID+
-                " Student:"+studentID+
-                " Assignment:"+assignmentID+
-                " Score:"+grade;
-    }
 }

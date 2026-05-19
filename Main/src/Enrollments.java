@@ -73,9 +73,4 @@ public class Enrollments {
             allEnrollments.add(enrollments);
         }
     }
-
-    @Override
-    public String toString() {
-        return enrollmentID + "";
-    }
 }

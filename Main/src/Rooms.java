@@ -92,10 +92,4 @@ public class Rooms {
 
         return sb.toString();
     }
-
-    // Used for testing
-    @Override
-    public String toString() {
-        return roomID + "";
-    }
 }

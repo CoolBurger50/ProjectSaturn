@@ -86,12 +86,4 @@ public class Courses {
             return fileData;
         }
     }
-
-
-
-    // Used for testing
-    @Override
-    public String toString() {
-        return courseID + "";
-    }
 }
