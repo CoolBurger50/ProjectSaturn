@@ -96,6 +96,6 @@ public class Rooms {
     // Used for testing
     @Override
     public String toString() {
-        return "\n\n" + floor+wing+room + "\nRoomID:" + roomID + "\nAvailability";
+        return roomID + "";
     }
 }

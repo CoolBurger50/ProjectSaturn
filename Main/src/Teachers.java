@@ -105,6 +105,6 @@ public class Teachers {
     // Used for testing
     @Override
     public String toString() {
-        return "\n\nName: " + firstName + lastName + "\nTeacherID: " + teacherID + "\nDeptID: " + departmentID + "\n";
+        return teacherID + "";
     }
 }

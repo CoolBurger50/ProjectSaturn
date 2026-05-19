@@ -6,19 +6,17 @@ public class Sections {
     private final Enrollments enrollment;
     private final Courses course;
     private final int sectionID;
-    private static int counter = 1;
-    private static final ArrayList<ArrayList<Sections>> allSections = new ArrayList<>();
+    private static int counter=1;
+    private static final ArrayList<ArrayList<Sections>> allSections=new ArrayList<>();
 
-    // Constructor Method
-    public Sections(Teachers teacher, Rooms room, Enrollments enrollment, Courses course){
-        this.teacher = teacher;
-        this.room = room;
-        this.enrollment = enrollment;
-        this.course = course;
-        sectionID=counter++;
+    public Sections(Teachers teacher, Rooms room, Enrollments enrollment, Courses course) {
+        this.teacher=teacher;
+        this.room=room;
+        this.enrollment=enrollment;
+        this.course=course;
+        this.sectionID=counter++;
     }
 
-    // Getter Methods
     public int getSectionID() {
         return sectionID;
     }
@@ -27,37 +25,58 @@ public class Sections {
         return allSections;
     }
 
-    // Arraylist Generation
     public static void generateSections() {
-        int numOfCourses = Courses.getAllCourses().size();
-        int numOfEnrollments = Enrollments.getAllEnrollments().size();
-        int numOfSectionsPerCourse = numOfCourses/numOfEnrollments;
-        int leftoverSections = numOfCourses%numOfEnrollments;
-
-        // for each period in enrollments
-        for (ArrayList<Enrollments> enrollments: Enrollments.getAllEnrollments()) {
-            ArrayList<Rooms> allRooms = Rooms.getAllRooms();
-            ArrayList<Courses> allCourses = Courses.getAllCourses();
-            ArrayList<Teachers> allTeachers = Teachers.getAllTeachers();
-            ArrayList<Sections> sections = new ArrayList<>();
-            // for each enrollment
-            for (Enrollments enrollment : enrollments) {
-                    // get random section info
-                    Courses randomCourse = allCourses.get((int)(Math.random() * allCourses.size()));
-                    Teachers randomTeacher = allTeachers.remove((int)(Math.random() * allTeachers.size()));
-                    Rooms randomRoom = allRooms.remove((int)(Math.random() * allRooms.size()));
-                    Sections currentSection = new Sections(randomTeacher, randomRoom, enrollment , randomCourse);
-                    sections.add(currentSection);
-
+        for(ArrayList<Enrollments> enrollments:Enrollments.getAllEnrollments()) {
+            ArrayList<Rooms> allRooms=new ArrayList<>(Rooms.getAllRooms());
+            ArrayList<Courses> allCourses=new ArrayList<>(Courses.getAllCourses());
+            ArrayList<Teachers> allTeachers=new ArrayList<>(Teachers.getAllTeachers());
+            ArrayList<Sections> sections=new ArrayList<>();
+            for(Enrollments enrollment:enrollments) {
+                if(allTeachers.isEmpty()||allRooms.isEmpty()) {
+                    break;
+                }
+                Courses randomCourse= allCourses.get((int)(Math.random()*allCourses.size()));
+                Teachers randomTeacher= allTeachers.remove((int)(Math.random()*allTeachers.size()));
+                Rooms randomRoom= allRooms.remove((int)(Math.random()*allRooms.size()));
+                Sections currentSection= new Sections(randomTeacher,randomRoom,enrollment,randomCourse);
+                sections.add(currentSection);
             }
             allSections.add(sections);
-
         }
     }
 
-    // Used for testing
+    public static String createInserts() {
+
+        StringBuilder sb=new StringBuilder();
+
+        sb.append("INSERT INTO Sections (teacher_id, room_id, enrollment_id, course_id) VALUES\n");
+
+        int count=0;
+        int total=0;
+
+        for(ArrayList<Sections> period:allSections) {
+            total+=period.size();
+        }
+        for(ArrayList<Sections> period:allSections) {
+            for(Sections section:period) {
+                sb.append("(")
+                        .append(section.teacher.getTeacherID()).append(", ")
+                        .append(section.room.getRoomID()).append(", ")
+                        .append(section.enrollment.getEnrollmentID()).append(", ")
+                        .append(section.course.getCourseID()).append(")");
+                count++;
+                if(count<total) {
+                    sb.append(",\n");
+                } else {
+                    sb.append(";");
+                }
+            }
+        }
+        return sb.toString();
+    }
+
     @Override
     public String toString() {
-        return "\n\nSectionID: " + sectionID + "\nTeacherID: " + teacher + "\nRoom: " + room + "\nEnrollment: " + enrollment;
+        return "\nSectionID: "+sectionID+ "\nTeacher: "+teacher+ "\nRoom: "+room+ "\nEnrollment: "+enrollment+ "\nCourse: "+course;
     }
 }

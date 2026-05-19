@@ -2,7 +2,6 @@ public class Runner {
     public static void Main() {
         setup();
         System.out.print("Everything is working!!");
-        System.out.println(Sections.getAllSections());
     }
 
     private static void setup() {
@@ -11,7 +10,9 @@ public class Runner {
         Teachers.generateTeachers();
         Courses.generateCourses();
         Students.generateStudents(1000);
-        Enrollments.generateEnrollments();
+        Enrollments.generateEnrollments(12);
         Sections.generateSections();
+        Assignments.generateAssignments();
+        Grades.generateGrades();
     }
 }

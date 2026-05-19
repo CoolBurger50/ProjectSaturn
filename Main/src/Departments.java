@@ -35,9 +35,24 @@ public class Departments {
         }
     }
 
-    // Creates Inserts Statements [NOT COMPLETE] [TOBE EDITED]
     public static String createInserts() {
-        return null;
+        StringBuilder sb=new StringBuilder();
+        sb.append("INSERT INTO Departments (department_name) VALUES\n");
+        int count=0;
+        int total=allDepartments.size();
+        for(Departments dept:allDepartments) {
+            sb.append("('")
+                    .append(dept.departmentName)
+                    .append("')");
+            count++;
+            if(count<total) {
+                sb.append(",\n");
+            } else {
+                sb.append(";");
+            }
+        }
+
+        return sb.toString();
     }
 
     // Used for testing

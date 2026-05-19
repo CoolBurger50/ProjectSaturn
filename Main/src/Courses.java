@@ -49,9 +49,24 @@ public class Courses {
         }
     }
 
-    // Creates Inserts Statements [NOT COMPLETE] [TOBE EDITED]
     public static String createInserts() {
-        return null;
+        StringBuilder sb=new StringBuilder();
+        sb.append("INSERT INTO Courses (course_name, department_id) VALUES\n");
+        int count=0;
+        int total=allCourses.size();
+        for(Courses course:allCourses) {
+            sb.append("('")
+                    .append(course.courseName).append("', ")
+                    .append(course.departmentID).append(")");
+            count++;
+
+            if(count<total) {
+                sb.append(",\n");
+            } else {
+                sb.append(";");
+            }
+        }
+        return sb.toString();
     }
 
     // Simple getFileData Method
@@ -72,9 +87,11 @@ public class Courses {
         }
     }
 
+
+
     // Used for testing
     @Override
     public String toString() {
-        return "\n\nName: " + courseName + "\nCourseID: " + courseID + "\nDepartID: " + departmentID + "\n";
+        return courseID + "";
     }
 }

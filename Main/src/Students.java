@@ -53,6 +53,25 @@ public class Students {
         }
     }
 
+    public static String createInserts() {
+        StringBuilder sb=new StringBuilder();
+        sb.append("INSERT INTO Students (first_name, last_name) VALUES\n");
+        int count=0;
+        int total=allStudents.size();
+        for(Students student:allStudents) {
+            sb.append("('")
+                    .append(student.firstName).append("', '")
+                    .append(student.lastName).append("')");
+            count++;
+            if(count<total) {
+                sb.append(",\n");
+            } else {
+                sb.append(";");
+            }
+        }
+        return sb.toString();
+    }
+
     // Simple getFileData Method
     public static ArrayList<String> getFileData(String fileName) {
         ArrayList<String> fileData = new ArrayList<String>();
