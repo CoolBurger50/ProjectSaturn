@@ -1,20 +1,20 @@
 import java.util.*;
 
 public class Sections {
-    private final Teachers teacher;
-    private final Rooms room;
+    private Teachers teacher;
+    private Rooms room;
     private final Enrollments enrollment;
     private final Courses course;
     private final int sectionID;
-    private static int counter=1;
+    private static int sectionCounter =1;
     private static final ArrayList<ArrayList<Sections>> allSections=new ArrayList<>();
 
-    public Sections(Teachers teacher, Rooms room, Enrollments enrollment, Courses course) {
-        this.teacher=teacher;
-        this.room=room;
+    public Sections(Enrollments enrollment, Courses course) {
+        teacher = null;
+        room = null;
         this.enrollment=enrollment;
         this.course=course;
-        this.sectionID=counter++;
+        this.sectionID= sectionCounter++;
     }
 
     public int getSectionID() {
@@ -23,6 +23,22 @@ public class Sections {
 
     public static ArrayList<ArrayList<Sections>> getAllSections() {
         return allSections;
+    }
+
+    public Courses getCourse() {
+        return course;
+    }
+
+    public static int getCourseID(Enrollments enroll) {
+        int num = -1;
+        for(ArrayList<Enrollments> enrollments:Enrollments.getAllEnrollments()) {
+            for(Enrollments enrollment:enrollments) {
+                if (enroll == enrollment) {
+                    num = getAllSections().getCourse().getCourseID();
+                }
+            }
+        }
+        return num;
     }
 
     public static void generateSections() {

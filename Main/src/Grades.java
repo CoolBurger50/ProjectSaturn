@@ -5,13 +5,13 @@ public class Grades {
     private final int studentID;
     private final int grade;
     private final int gradeID;
-    private static int counter=1;
+    private static int gradeCounter =1;
     private static final ArrayList<Grades> allGrades=new ArrayList<>();
 
     public Grades(int studentID,int assignmentID) {
         this.studentID=studentID;
         this.assignmentID=assignmentID;
-        this.gradeID=counter++;
+        this.gradeID= gradeCounter++;
         this.grade=(int)(Math.random()*26)+75;
     }
 
@@ -36,13 +36,13 @@ public class Grades {
     }
 
     public static void generateGrades() {
-        ArrayList<Students> allStudents=Students.getAllStudents();
         ArrayList<Assignments> allAssignments=Assignments.getAllAssignments();
-        for(Students student:allStudents) {
-            int studentID=student.getStudentID();
-            for(Assignments assignment:allAssignments) {
-                Grades currentGrade= new Grades(studentID,assignment.getAssignmentID());
-                allGrades.add(currentGrade);
+        for (ArrayList<Enrollments> period : Enrollments.getAllEnrollments()){
+            for (Enrollments classes : period) {
+                for (Students students : classes.getStudentsEnrolled()) {
+                    Grades currentGrade = new Grades(students.getStudentID(), Sections.getCourseID(classes));
+                    allGrades.add(currentGrade);
+                }
             }
         }
     }

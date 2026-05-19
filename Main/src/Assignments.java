@@ -4,13 +4,13 @@ public class Assignments {
     private final int courseID;
     private final String assignmentName;
     private final String assignmentType;
-    private static int counter=1;
+    private static int assignmentCounter =1;
     private final int assignmentID;
     private static final ArrayList<Assignments> allAssignments=new ArrayList<>();
 
     public Assignments(int courseID,String assignmentName,String assignmentType) {
         this.courseID=courseID;
-        this.assignmentID=counter++;
+        this.assignmentID= assignmentCounter++;
         this.assignmentName=assignmentName;
         this.assignmentType=assignmentType;
     }
@@ -48,7 +48,7 @@ public class Assignments {
                     assignmentType = "Major";
                     assignmentName = "Unit " + unit + "Test";
                     unit++;
-                    lesson = 0;
+                    lesson = 1;
                 } else {
                     assignmentType = "Minor";
                     assignmentName = "Unit " + unit + " Lesson " + lesson;

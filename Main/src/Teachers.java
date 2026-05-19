@@ -4,7 +4,7 @@ import java.io.*;
 public class Teachers {
     private final String firstName;
     private final String lastName;
-    private static int counter = 1;
+    private static int teacherCounter = 1;
     private final int teacherID;
     private final int departmentID;
     private static final ArrayList<Teachers> allTeachers = new ArrayList<>();
@@ -14,7 +14,7 @@ public class Teachers {
         this.firstName = firstName;
         this.lastName = lastName;
         this.departmentID = departmentID;
-        teacherID = counter++;
+        teacherID = teacherCounter++;
     }
 
     // Getter Methods

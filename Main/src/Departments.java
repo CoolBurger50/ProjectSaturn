@@ -2,14 +2,14 @@ import java.util.*;
 
 public class Departments {
     private final String departmentName;
-    private static int counter = 1;
+    private static int departmentCounter = 1;
     private final int departmentID;
     private static final ArrayList<Departments> allDepartments = new ArrayList<>();
 
     // Constructor Method
     public Departments (String departmentName){
         this.departmentName = departmentName;
-        departmentID = counter++;
+        departmentID = departmentCounter++;
     }
 
     // Getter Methods

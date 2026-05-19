@@ -3,7 +3,7 @@ import java.io.*;
 
 public class Courses {
     private final String courseName;
-    private static int counter = 1;
+    private static int courseCounter = 1;
     private final int courseID;
     private final int departmentID;
     private static final ArrayList<Courses> allCourses = new ArrayList<>();
@@ -12,7 +12,7 @@ public class Courses {
     public Courses (String courseName, int departmentID){
         this.courseName = courseName;
         this.departmentID = departmentID;
-        courseID = counter++;
+        courseID = courseCounter++;
     }
 
     // Getter Methods

@@ -6,7 +6,7 @@ import java.util.Scanner;
 public class Students {
     private final String firstName;
     private final String lastName;
-    private static int counter = 1;
+    private static int studentCounter = 1;
     private final int studentID;
     private static final ArrayList<Students> allStudents = new ArrayList<>();
 
@@ -14,7 +14,7 @@ public class Students {
     public Students(String firstName, String lastName){
         this.firstName = firstName;
         this.lastName = lastName;
-        studentID = counter++;
+        studentID = studentCounter++;
     }
 
     // Getter Methods

@@ -4,10 +4,10 @@ public class Enrollments {
     private ArrayList<Students> studentsEnrolled;
     private static final ArrayList<ArrayList<Enrollments>> allEnrollments=new ArrayList<>();
     private final int enrollmentID;
-    private static int counter=1;
+    private static int enrollmentCounter =1;
 
     public Enrollments(ArrayList<Students> students) {
-        this.enrollmentID=counter++;
+        this.enrollmentID= enrollmentCounter++;
         this.studentsEnrolled=students;
     }
 
@@ -17,6 +17,18 @@ public class Enrollments {
 
     public ArrayList<Students> getStudentsEnrolled() {
         return studentsEnrolled;
+    }
+
+    public static void getStudent() {
+        for (ArrayList<Enrollments> period : allEnrollments){
+            for (Enrollments classes : period) {
+                System.out.println("NEW PERIOD!!!!!");
+                for (Students students : classes.studentsEnrolled) {
+                    //System.out.println(students.getFirstName() + " " + students.getLastName() + " " + students.getStudentID());
+
+                }
+            }
+        }
     }
 
     public static ArrayList<ArrayList<Enrollments>> getAllEnrollments() {

@@ -3,13 +3,16 @@ public class Rooms {
     private int floor;
     private String wing;
     private int room;
-    private static int counter = 1;
+    private static int roomCounter = 1;
     private final int roomID;
     private static final ArrayList<Rooms> allRooms = new ArrayList<>();
 
     // Constructor Method
-    public Rooms(int Floor, String Wing, int Room) {
-        roomID = counter++;
+    public Rooms(int floor, String wing, int room) {
+        this.floor = floor;
+        this.wing = wing;
+        this.room = room;
+        roomID = roomCounter++;
     }
 
     // Getter Methods
@@ -78,9 +81,9 @@ public class Rooms {
 
         for (Rooms room : allRooms) {
             sb.append("('")
-                    .append(room.getFloor()).append("', '")
-                    .append(room.getWing()).append("', ")
-                    .append(room.getRoom()).append(")");
+                    .append(room.floor).append("', '")
+                    .append(room.wing).append("', ")
+                    .append(room.room).append(")");
 
             count++;
             if (count < total) {
