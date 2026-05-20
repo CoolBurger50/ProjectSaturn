@@ -17,6 +17,14 @@ public class Sections {
         this.sectionID= sectionCounter++;
     }
 
+    public void setTeacher(Teachers teacher) {
+        this.teacher=teacher;
+    }
+
+    public void setRoom(Rooms room) {
+        this.room = room;
+    }
+
     public int getSectionID() {
         return sectionID;
     }
@@ -29,12 +37,12 @@ public class Sections {
         return course;
     }
 
-    public static int getCourseID(Enrollments enroll) {
+    public static int getCourse(Enrollments enrollment) {
         int num = -1;
-        for(ArrayList<Enrollments> enrollments:Enrollments.getAllEnrollments()) {
-            for(Enrollments enrollment:enrollments) {
-                if (enroll == enrollment) {
-                    num = getAllSections().getCourse().getCourseID();
+        for (ArrayList<Sections> sections : allSections) {
+            for (Sections section : sections) {
+                if (section.enrollment == enrollment) {
+                    num = section.course.getCourseID();
                 }
             }
         }
@@ -43,21 +51,28 @@ public class Sections {
 
     public static void generateSections() {
         for(ArrayList<Enrollments> enrollments:Enrollments.getAllEnrollments()) {
-            ArrayList<Rooms> allRooms=new ArrayList<>(Rooms.getAllRooms());
             ArrayList<Courses> allCourses=new ArrayList<>(Courses.getAllCourses());
-            ArrayList<Teachers> allTeachers=new ArrayList<>(Teachers.getAllTeachers());
             ArrayList<Sections> sections=new ArrayList<>();
             for(Enrollments enrollment:enrollments) {
-                if(allTeachers.isEmpty()||allRooms.isEmpty()) {
-                    break;
-                }
                 Courses randomCourse= allCourses.get((int)(Math.random()*allCourses.size()));
-                Teachers randomTeacher= allTeachers.remove((int)(Math.random()*allTeachers.size()));
-                Rooms randomRoom= allRooms.remove((int)(Math.random()*allRooms.size()));
-                Sections currentSection= new Sections(randomTeacher,randomRoom,enrollment,randomCourse);
+                Sections currentSection= new Sections(enrollment,randomCourse);
                 sections.add(currentSection);
             }
             allSections.add(sections);
+        }
+        for (ArrayList<Sections> sections : allSections) {
+            ArrayList<Teachers> allTeachers=new ArrayList<>(Teachers.getAllTeachers());
+            ArrayList<Rooms> allRooms=new ArrayList<>(Rooms.getAllRooms());
+            for (Sections section : sections) {
+                if (!allTeachers.isEmpty()) {
+                    Teachers randomTeacher= allTeachers.remove((int)(Math.random()*allTeachers.size()));
+                    section.setTeacher(randomTeacher);
+                }
+                if (!allRooms.isEmpty()) {
+                    Rooms randomRoom= allRooms.remove((int)(Math.random()*allRooms.size()));
+                    section.setRoom(randomRoom);
+                }
+            }
         }
     }
 

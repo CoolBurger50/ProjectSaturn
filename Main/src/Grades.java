@@ -40,8 +40,7 @@ public class Grades {
         for (ArrayList<Enrollments> period : Enrollments.getAllEnrollments()){
             for (Enrollments classes : period) {
                 for (Students students : classes.getStudentsEnrolled()) {
-                    Grades currentGrade = new Grades(students.getStudentID(), Sections.getCourseID(classes));
-                    allGrades.add(currentGrade);
+
                 }
             }
         }
