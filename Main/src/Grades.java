@@ -36,10 +36,23 @@ public class Grades {
     }
 
     public static void generateGrades() {
-        ArrayList<Assignments> allAssignments=Assignments.getAllAssignments();
-        for (ArrayList<Enrollments> period : Enrollments.getAllEnrollments()){
-            for (Enrollments classes : period) {
-                for (Students students : classes.getStudentsEnrolled()) {
+        for (ArrayList<Sections> sectionsOutsideLoop : Sections.getAllSections()){
+            for (Sections sectionInsideLoop : sectionsOutsideLoop){
+                int courseNumber = sectionInsideLoop.getCourse().getCourseID();
+
+                ArrayList<Students> studentList = sectionInsideLoop.getEnrollment().getStudentsEnrolled();
+                for (Students student : studentList){
+                    int studentNumber = student.getStudentID();
+
+                    ArrayList<Assignments> assignments = new ArrayList<>();
+                    for (Assignments assignment : Assignments.getAllAssignments()) {
+                        if (assignments.size() == 15 || assignment.getCourseID() != courseNumber) {
+                            continue;
+                        }
+                        assignments.add(assignment);
+                        Grades grade = new Grades(studentNumber, assignment.getAssignmentID());
+                        allGrades.add(grade);
+                    }
 
                 }
             }
@@ -67,4 +80,5 @@ public class Grades {
 
         return sb.toString();
     }
+
 }

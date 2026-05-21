@@ -25,6 +25,10 @@ public class Sections {
         this.room = room;
     }
 
+    public Enrollments getEnrollment() {
+        return enrollment;
+    }
+
     public int getSectionID() {
         return sectionID;
     }

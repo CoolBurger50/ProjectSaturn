@@ -46,7 +46,7 @@ public class Assignments {
                 String assignmentName;
                 if (i % 5 == 0) {
                     assignmentType = "Major";
-                    assignmentName = "Unit " + unit + "Test";
+                    assignmentName = "Unit " + unit + " Test";
                     unit++;
                     lesson = 1;
                 } else {

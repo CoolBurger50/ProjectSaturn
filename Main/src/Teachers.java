@@ -9,7 +9,6 @@ public class Teachers {
     private final int departmentID;
     private static final ArrayList<Teachers> allTeachers = new ArrayList<>();
 
-    // Constructor Method
     public Teachers (String firstName, String lastName, int departmentID){
         this.firstName = firstName;
         this.lastName = lastName;
@@ -17,7 +16,6 @@ public class Teachers {
         teacherID = teacherCounter++;
     }
 
-    // Getter Methods
     public int getDepartmentID() {
         return departmentID;
     }
@@ -59,7 +57,6 @@ public class Teachers {
         }
     }
 
-    // Creates Inserts Statements
     public static String createInserts() {
         StringBuilder sb = new StringBuilder();
         sb.append("INSERT INTO Teachers (first_name, last_name, department_id) VALUES\n");
@@ -84,7 +81,6 @@ public class Teachers {
         return sb.toString();
     }
 
-    // Simple getFileData Method
     private static ArrayList<String> getFileData(String fileName) {
         ArrayList<String> fileData = new ArrayList<String>();
         try {

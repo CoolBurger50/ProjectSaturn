@@ -3,6 +3,7 @@ import java.io.*;
 public class Runner {
     public static void Main() {
         setup();
+        createInsertFile();
         System.out.println("Everything is working!!");
     }
 
