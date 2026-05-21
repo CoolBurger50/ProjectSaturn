@@ -4,7 +4,7 @@ public class Runner {
     public static void Main() {
         setup();
         createInsertFile();
-        System.out.println("Everything is working!!");
+        System.out.print("Everything is working!!");
     }
 
     private static void setup() {
@@ -20,7 +20,7 @@ public class Runner {
     }
 
     private static void createInsertFile() {
-        try (PrintWriter out = new PrintWriter("Main/Files/InsertStatements")) {
+        try (PrintWriter out = new PrintWriter("Main/InsertStatements")) {
             out.println(inserts());
         } catch (IOException e) {
             e.printStackTrace();

@@ -4,19 +4,12 @@ public class Grades {
     private final int assignmentID;
     private final int studentID;
     private final int grade;
-    private final int gradeID;
-    private static int gradeCounter =1;
     private static final ArrayList<Grades> allGrades=new ArrayList<>();
 
     public Grades(int studentID,int assignmentID) {
         this.studentID=studentID;
         this.assignmentID=assignmentID;
-        this.gradeID= gradeCounter++;
         this.grade=(int)(Math.random()*26)+75;
-    }
-
-    public int getGradeID() {
-        return gradeID;
     }
 
     public int getAssignmentID() {

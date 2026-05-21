@@ -6,13 +6,11 @@ public class Departments {
     private final int departmentID;
     private static final ArrayList<Departments> allDepartments = new ArrayList<>();
 
-    // Constructor Method
     public Departments (String departmentName){
         this.departmentName = departmentName;
         departmentID = departmentCounter++;
     }
 
-    // Getter Methods
     public static int getDepartmentID(String departmentName) {
         for (Departments department : allDepartments) {
             if (department.departmentName.equals(departmentName)) {
@@ -22,11 +20,6 @@ public class Departments {
         return 0;
     }
 
-    public static ArrayList<Departments> getAllDepartments() {
-        return allDepartments;
-    }
-
-    // Arraylist Generation
     public static void generateDepartments() {
         String[] subjects = {"bio", "chem", "cte", "english", "health_pe", "math", "physics", "social_studies", "special_education", "visual_art", "world_language"};
         for (String department : subjects) {
@@ -51,7 +44,6 @@ public class Departments {
                 sb.append(";");
             }
         }
-
         return sb.toString();
     }
 }

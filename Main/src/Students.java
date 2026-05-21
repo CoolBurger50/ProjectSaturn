@@ -10,39 +10,28 @@ public class Students {
     private final int studentID;
     private static final ArrayList<Students> allStudents = new ArrayList<>();
 
-    // Constructor Method
     public Students(String firstName, String lastName){
         this.firstName = firstName;
         this.lastName = lastName;
         studentID = studentCounter++;
     }
 
-    // Getter Methods
     public int getStudentID() {
         return studentID;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
     }
 
     public static ArrayList<Students> getAllStudents(){
         return allStudents;
     }
 
-    // ArrayList Generation
     public static void generateStudents(int amount) {
-        String basePath = "Main/Files/student";
+        String basePath = HelperMethods.getPathLocation() + "Main/Files/student";
 
         String firstNamePath = basePath + "/student_first_names.txt";
         String lastNamePath = basePath + "/student_last_names.txt";
 
-        ArrayList<String> allFirstNames = getFileData(firstNamePath);
-        ArrayList<String> allLastNames = getFileData(lastNamePath);
+        ArrayList<String> allFirstNames = HelperMethods.getFileData(firstNamePath);
+        ArrayList<String> allLastNames = HelperMethods.getFileData(lastNamePath);
 
         for (int i = 0; i < amount; i++) {
             String firstName = allFirstNames.get((int)(Math.random() * allFirstNames.size()));
@@ -70,23 +59,5 @@ public class Students {
             }
         }
         return sb.toString();
-    }
-
-    // Simple getFileData Method
-    public static ArrayList<String> getFileData(String fileName) {
-        ArrayList<String> fileData = new ArrayList<String>();
-        try {
-            File f = new File(fileName);
-            Scanner s = new Scanner(f);
-            while (s.hasNextLine()) {
-                String line = s.nextLine();
-                if (!line.equals(""))
-                    fileData.add(line);
-            }
-            return fileData;
-        }
-        catch (FileNotFoundException e) {
-            return fileData;
-        }
     }
 }

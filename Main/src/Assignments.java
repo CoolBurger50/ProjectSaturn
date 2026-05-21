@@ -60,15 +60,6 @@ public class Assignments {
         }
     }
 
-    public Assignments fromAssignmentID(int assignmentID) {
-        for(Assignments assignment:allAssignments) {
-            if(assignment.getAssignmentID()==assignmentID) {
-                return assignment;
-            }
-        }
-        return null;
-    }
-
     public static String createInserts() {
 
         StringBuilder sb=new StringBuilder();

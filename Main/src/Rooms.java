@@ -7,7 +7,6 @@ public class Rooms {
     private final int roomID;
     private static final ArrayList<Rooms> allRooms = new ArrayList<>();
 
-    // Constructor Method
     public Rooms(int floor, String wing, int room) {
         this.floor = floor;
         this.wing = wing;
@@ -15,40 +14,10 @@ public class Rooms {
         roomID = roomCounter++;
     }
 
-    // Getter Methods
-    public int getFloor() {
-        return floor;
-    }
-
-    public String getWing() {
-        return wing;
-    }
-
-    public int getRoom() {
-        return room;
-    }
-
     public int getRoomID() {
         return roomID;
     }
 
-    public static ArrayList<Rooms> getAllRooms() {
-        return allRooms;
-    }
-
-    // Hashmap Generation
-    public static void generateRooms() {
-        for (int i = 0; i <= 8; i++) {
-            for (int j = 0; j <= 3; j++) {
-                for (int n = 1; n <= 20; n++) {
-                    Rooms currentRoom = new Rooms(i,getWing(j),n);
-                    allRooms.add(currentRoom);
-                }
-            }
-        }
-    }
-
-    // Convert Int -> Wing
     private static String getWing(int j) {
         if (j == 0) {
             return "n";
@@ -61,17 +30,21 @@ public class Rooms {
         }
     }
 
-    // Object -> ID translation
-    public Rooms fromRoomID(int roomID) {
-        for (Rooms room : allRooms) {
-            if (room.getRoomID() == roomID) {
-                return room;
-            }
-        }
-        return null;
+    public static ArrayList<Rooms> getAllRooms() {
+        return allRooms;
     }
 
-    // Creates Inserts Statements
+    public static void generateRooms() {
+        for (int i = 0; i <= 8; i++) {
+            for (int j = 0; j <= 3; j++) {
+                for (int n = 1; n <= 20; n++) {
+                    Rooms currentRoom = new Rooms(i,getWing(j),n);
+                    allRooms.add(currentRoom);
+                }
+            }
+        }
+    }
+
     public static String createInserts() {
         StringBuilder sb = new StringBuilder();
         sb.append("INSERT INTO Rooms (room_floor, room_wing, room_number) VALUES\n");

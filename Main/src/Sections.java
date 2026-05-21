@@ -41,18 +41,6 @@ public class Sections {
         return course;
     }
 
-    public static int getCourse(Enrollments enrollment) {
-        int num = -1;
-        for (ArrayList<Sections> sections : allSections) {
-            for (Sections section : sections) {
-                if (section.enrollment == enrollment) {
-                    num = section.course.getCourseID();
-                }
-            }
-        }
-        return num;
-    }
-
     public static void generateSections() {
         for(ArrayList<Enrollments> enrollments:Enrollments.getAllEnrollments()) {
             ArrayList<Courses> allCourses=new ArrayList<>(Courses.getAllCourses());

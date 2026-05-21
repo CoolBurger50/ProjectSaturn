@@ -19,27 +19,8 @@ public class Enrollments {
         return studentsEnrolled;
     }
 
-    public static void getStudent() {
-        for (ArrayList<Enrollments> period : allEnrollments){
-            for (Enrollments classes : period) {
-                System.out.println("NEW PERIOD!!!!!");
-                for (Students students : classes.studentsEnrolled) {
-                    //System.out.println(students.getFirstName() + " " + students.getLastName() + " " + students.getStudentID());
-
-                }
-            }
-        }
-    }
-
     public static ArrayList<ArrayList<Enrollments>> getAllEnrollments() {
         return allEnrollments;
-    }
-
-    public static int getEnrollmentSize() {
-        if(allEnrollments.isEmpty()) {
-            return 0;
-        }
-        return allEnrollments.get(0).size();
     }
 
     public static String createInserts() {
