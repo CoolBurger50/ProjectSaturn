@@ -21,7 +21,7 @@ public class Runner {
     }
 
     private static void createInsertFile() {
-        try (PrintWriter out = new PrintWriter("Main/InsertStatements")) {
+        try (PrintWriter out = new PrintWriter(HelperMethods.getPathLocation() + "Main/InsertStatements")) {
             out.println(inserts());
         } catch (IOException e) {
             e.printStackTrace();

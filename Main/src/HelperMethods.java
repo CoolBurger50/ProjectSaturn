@@ -6,11 +6,8 @@ import java.io.File;
 
 public class HelperMethods {
     public static String getPathLocation() {
-        ArrayList<String> config = HelperMethods.getFileData("Main/Config");
-        if (!config.get(1).equals("true")) {
-            return "";
-        }
-        return config.get(0);
+        return "";
+        //return "/home/raymondz66/Projects/ProjectSaturn/";
     }
 
     public static ArrayList<String> getFileData(String fileName) {

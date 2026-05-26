@@ -30,7 +30,7 @@ public class Students {
         ArrayList<String> allFirstNames = HelperMethods.getFileData(firstNamePath);
         ArrayList<String> allLastNames = HelperMethods.getFileData(lastNamePath);
 
-        for (int i = 0; i < amount; i++) {
+        for (int i = 0; i <= amount; i++) {
             String firstName = allFirstNames.get((int)(Math.random() * allFirstNames.size()));
             String lastName = allLastNames.get((int)(Math.random() * allLastNames.size()));
 
