@@ -22,7 +22,7 @@ public class Runner {
     }
 
     private static void createInsertFile() {
-        try (PrintWriter out = new PrintWriter(HelperMethods.getPathLocation() + "Main/InsertStatements.sql")) {
+        try (PrintWriter out = new PrintWriter(HelperMethods.getPathLocation() + "Main/sql/InsertStatements.sql")) {
             out.println(inserts());
         } catch (IOException e) {
             e.printStackTrace();

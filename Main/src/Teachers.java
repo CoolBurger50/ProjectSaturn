@@ -15,20 +15,8 @@ public class Teachers {
         teacherID = teacherCounter++;
     }
 
-    public int getDepartmentID() {
-        return departmentID;
-    }
-
     public int getTeacherID() {
         return teacherID;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getFirstName() {
-        return firstName;
     }
 
     public static ArrayList<Teachers> getAllTeachers() {
@@ -64,15 +52,15 @@ public class Teachers {
 
         for (Teachers teacher : allTeachers) {
             sb.append("('")
-                    .append(teacher.getFirstName()).append("', '")
-                    .append(teacher.getLastName()).append("', ")
-                    .append(teacher.getDepartmentID()).append(")");
+                    .append(teacher.firstName).append("', '")
+                    .append(teacher.lastName).append("', ")
+                    .append(teacher.departmentID).append(")");
 
             count++;
             if (count < total) {
                 sb.append(",\n");
             } else {
-                sb.append(";");
+                sb.append(";\n");
             }
         }
 

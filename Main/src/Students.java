@@ -52,7 +52,7 @@ public class Students {
             if(count<total) {
                 sb.append(",\n");
             } else {
-                sb.append(";");
+                sb.append(";\n");
             }
         }
         return sb.toString();

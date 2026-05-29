@@ -23,14 +23,6 @@ public class Assignments {
         return courseID;
     }
 
-    public String getAssignmentName() {
-        return assignmentName;
-    }
-
-    public String getAssignmentType() {
-        return assignmentType;
-    }
-
     public static ArrayList<Assignments> getAllAssignments() {
         return allAssignments;
     }
@@ -81,7 +73,7 @@ public class Assignments {
             if(count<total) {
                 sb.append(",\n");
             } else {
-                sb.append(";");
+                sb.append(";\n");
             }
         }
 

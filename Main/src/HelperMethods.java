@@ -3,7 +3,6 @@ import java.util.Scanner;
 import java.io.FileNotFoundException;
 import java.io.File;
 
-
 public class HelperMethods {
     public static String getPathLocation() {
         return "";

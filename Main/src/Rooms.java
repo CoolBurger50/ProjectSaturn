@@ -63,7 +63,7 @@ public class Rooms {
             if (count < total) {
                 sb.append(",\n");
             } else {
-                sb.append(";");
+                sb.append(";\n");
             }
         }
 

@@ -75,7 +75,7 @@ public class Grades {
             if(count<total) {
                 sb.append(",\n");
             } else {
-                sb.append(";");
+                sb.append(";\n");
             }
         }
 

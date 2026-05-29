@@ -12,16 +12,32 @@ public class Enrollments {
         this.studentsEnrolled=students;
     }
 
-    public int getEnrollmentID() {
-        return enrollmentID;
-    }
-
     public ArrayList<Students> getStudentsEnrolled() {
         return studentsEnrolled;
     }
 
     public static ArrayList<ArrayList<Enrollments>> getAllEnrollments() {
         return allEnrollments;
+    }
+
+    public static void generateEnrollments(int amount) {
+        for(int i=0;i<10;i++) {
+            ArrayList<Enrollments> enrollments=new ArrayList<>();
+            ArrayList<Students> allStudents=new ArrayList<>(Students.getAllStudents());
+            int totalStudentCount=allStudents.size();
+            int numberOfClasses=totalStudentCount/amount;
+            for(int n=0;n<numberOfClasses;n++) {
+                ArrayList<Students> temp=new ArrayList<>();
+                for(int j=0;j<amount;j++) {
+                    int randomIndex=(int)(Math.random()*allStudents.size());
+                    Students chosenStudent=allStudents.remove(randomIndex);
+                    temp.add(chosenStudent);
+                }
+                Enrollments currentEnrollment=new Enrollments(temp);
+                enrollments.add(currentEnrollment);
+            }
+            allEnrollments.add(enrollments);
+        }
     }
 
     public static String createInserts() {
@@ -48,32 +64,11 @@ public class Enrollments {
                     if(count<total) {
                         sb.append(",\n");
                     } else {
-                        sb.append(";");
+                        sb.append(";\n");
                     }
                 }
             }
         }
         return sb.toString();
     }
-
-    public static void generateEnrollments(int amount) {
-        for(int i=0;i<10;i++) {
-            ArrayList<Enrollments> enrollments=new ArrayList<>();
-            ArrayList<Students> allStudents=new ArrayList<>(Students.getAllStudents());
-            int totalStudentCount=allStudents.size();
-            int numberOfClasses=totalStudentCount/amount;
-            for(int n=0;n<numberOfClasses;n++) {
-                ArrayList<Students> temp=new ArrayList<>();
-                for(int j=0;j<amount;j++) {
-                    int randomIndex=(int)(Math.random()*allStudents.size());
-                    Students chosenStudent=allStudents.remove(randomIndex);
-                    temp.add(chosenStudent);
-                }
-                Enrollments currentEnrollment=new Enrollments(temp);
-                enrollments.add(currentEnrollment);
-            }
-            allEnrollments.add(enrollments);
-        }
-    }
-
 }

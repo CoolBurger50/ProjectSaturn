@@ -7,7 +7,6 @@ public class Courses {
     private final int departmentID;
     private static final ArrayList<Courses> allCourses = new ArrayList<>();
 
-    // Constructor Method
     public Courses (String courseName, int departmentID){
         this.courseName = courseName;
         this.departmentID = departmentID;
@@ -52,7 +51,7 @@ public class Courses {
             if(count<total) {
                 sb.append(",\n");
             } else {
-                sb.append(";");
+                sb.append(";\n");
             }
         }
         return sb.toString();
