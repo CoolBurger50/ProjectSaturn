@@ -35,5 +35,6 @@ Make sure to change the file pathing in
 ```
 and 
 ```bash
-/ProjectSaturn/Main/MasterRunner
+/ProjectSaturn/Main/MasterRunner.sh
 ```
+Then simply run the MasterRunner.sh script
