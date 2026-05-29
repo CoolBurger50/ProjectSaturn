@@ -1,3 +1,4 @@
+import javax.imageio.stream.ImageInputStream;
 import java.util.ArrayList;
 
 public class Enrollments {
@@ -28,9 +29,11 @@ public class Enrollments {
         sb.append("INSERT INTO Enrollments (section_id, student_id) VALUES\n");
         int count=0;
         int total=0;
-        for(ArrayList<Enrollments> period:allEnrollments) {
-            for(Students student : period) {
-                total+=student.size();
+        for(ArrayList<Enrollments> period : allEnrollments) {
+            for(Enrollments enrollments : period) {
+                for (Students student : enrollments.getStudentsEnrolled()){
+                    total++;
+                }
             }
         }
 
@@ -39,31 +42,17 @@ public class Enrollments {
                 int section_id = section.getSectionID();
                 for (Students student : section.getEnrollment().studentsEnrolled) {
                     sb.append("(")
-                            .append(section_id)
+                            .append(section_id + ", ")
                             .append(student.getStudentID()).append(")");
                     count++;
+                    if(count<total) {
+                        sb.append(",\n");
+                    } else {
+                        sb.append(";");
+                    }
                 }
             }
         }
-
-        /*
-        for(ArrayList<Enrollments> period:allEnrollments) {
-            total+=period.size();
-        }
-        for(ArrayList<Enrollments> period:allEnrollments) {
-            for(Enrollments enrollment:period) {
-                sb.append("(")
-                        .append(enrollment.enrollmentID)
-                        .append(")");
-                count++;
-                if(count<total) {
-                    sb.append(",\n");
-                } else {
-                    sb.append(";");
-                }
-            }
-        }
-        */
         return sb.toString();
     }
 
@@ -86,4 +75,5 @@ public class Enrollments {
             allEnrollments.add(enrollments);
         }
     }
+
 }

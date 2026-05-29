@@ -72,7 +72,7 @@ public class Sections {
 
         StringBuilder sb=new StringBuilder();
 
-        sb.append("INSERT INTO Sections (teacher_id, room_id, enrollment_id, course_id) VALUES\n");
+        sb.append("INSERT INTO Sections (course_id, room_id, teacher_id, period_number) VALUES\n");
 
         int count=0;
         int total=0;
@@ -83,10 +83,10 @@ public class Sections {
         for(ArrayList<Sections> period:allSections) {
             for(Sections section:period) {
                 sb.append("(")
-                        .append(section.teacher.getTeacherID()).append(", ")
+                        .append(section.course.getCourseID()).append(", ")
                         .append(section.room.getRoomID()).append(", ")
-                        .append(section.enrollment.getEnrollmentID()).append(", ")
-                        .append(section.course.getCourseID()).append(")");
+                        .append(section.teacher.getTeacherID()).append(", ")
+                        .append(allSections.indexOf(period)+1).append(")");
                 count++;
                 if(count<total) {
                     sb.append(",\n");

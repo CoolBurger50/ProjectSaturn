@@ -4,12 +4,15 @@ public class Grades {
     private final int assignmentID;
     private final int studentID;
     private final int grade;
+    private final int gradeID;
+    private static int gradeCounter = 1;
     private static final ArrayList<Grades> allGrades=new ArrayList<>();
 
     public Grades(int studentID,int assignmentID) {
         this.studentID=studentID;
         this.assignmentID=assignmentID;
         this.grade=(int)(Math.random()*26)+75;
+        this.gradeID=gradeCounter++;
     }
 
     public int getAssignmentID() {
@@ -22,6 +25,10 @@ public class Grades {
 
     public int getGrade() {
         return grade;
+    }
+
+    public int getGradeID() {
+        return gradeID;
     }
 
     public static ArrayList<Grades> getAllGrades() {
@@ -54,12 +61,13 @@ public class Grades {
 
     public static String createInserts() {
         StringBuilder sb=new StringBuilder();
-        sb.append("INSERT INTO Grades (assignment_id, student_id, grade) VALUES\n");
+        sb.append("INSERT INTO Grades (grade_id, assignment_id, student_id, grade) VALUES\n");
         int count=0;
         int total=allGrades.size();
 
         for(Grades grade:allGrades) {
             sb.append("(")
+                    .append(grade.getGradeID()).append(", ")
                     .append(grade.getAssignmentID()).append(", ")
                     .append(grade.getStudentID()).append(", ")
                     .append(grade.getGrade()).append(")");

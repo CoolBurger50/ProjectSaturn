@@ -3,9 +3,10 @@ import java.io.PrintWriter;
 
 public class Runner {
     public static void Main() {
+        System.out.println("Runner is running !!");
         setup();
         createInsertFile();
-        System.out.print("Everything is working!!");
+        System.out.println("Everything is working !!");
     }
 
     private static void setup() {
@@ -13,15 +14,15 @@ public class Runner {
         Departments.generateDepartments();
         Teachers.generateTeachers();
         Courses.generateCourses();
-        Students.generateStudents(1000);
-        Enrollments.generateEnrollments(12);
+        Students.generateStudents(5000);
+        Enrollments.generateEnrollments(30);
         Sections.generateSections();
         Assignments.generateAssignments();
         Grades.generateGrades();
     }
 
     private static void createInsertFile() {
-        try (PrintWriter out = new PrintWriter(HelperMethods.getPathLocation() + "Main/InsertStatements")) {
+        try (PrintWriter out = new PrintWriter(HelperMethods.getPathLocation() + "Main/InsertStatements.sql")) {
             out.println(inserts());
         } catch (IOException e) {
             e.printStackTrace();
@@ -31,8 +32,8 @@ public class Runner {
     private static String inserts(){
         return Rooms.createInserts() + Departments.createInserts() +
                 Teachers.createInserts() + Courses.createInserts() +
-                Students.createInserts() + Enrollments.createInserts() +
-                Sections.createInserts() + Assignments.createInserts() +
+                Students.createInserts() + Sections.createInserts() +
+                Enrollments.createInserts() + Assignments.createInserts() +
                 Grades.createInserts();
     }
 }

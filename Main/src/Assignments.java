@@ -72,9 +72,9 @@ public class Assignments {
         for(Assignments assignment:allAssignments) {
 
             sb.append("(")
-                    .append(assignment.getCourseID()).append(", '")
-                    .append(assignment.getAssignmentName()).append("', '")
-                    .append(assignment.getAssignmentType()).append("')");
+                    .append(assignment.courseID).append(", '")
+                    .append(assignment.assignmentName).append("', '")
+                    .append(assignment.assignmentType).append("')");
 
             count++;
 
