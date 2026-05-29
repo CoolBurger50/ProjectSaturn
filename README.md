@@ -26,7 +26,7 @@ The final project for **Jr-Infra/DB**
 Goto where you want a copy and use:
 
 ```bash
-git clone https://github.com
+git clone https://github.com/CoolBurger50/ProjectSaturn
 ```
 
 Make sure to change the file pathing in
