@@ -17,8 +17,8 @@ installationsql=$path/sql/Installation.sql
 javac $path/src/*.java
 java -cp $path/src Main
 
-cat $createsql >> $installationsql
 cat $dropsql >> $installationsql
+cat $createsql >> $installationsql
 cat $insertsql >> $installationsql
 
 mysql -u $user -p -h 127.0.0.1 -D ${user}_db < $installationsql
