@@ -1,7 +1,7 @@
 #!/bin/bash
 
-path=/home/raymondz66/Projects/ProjectSaturn/Main
 user=raymondz66
+path=/home/${user}/Projects/ProjectSaturn/Main
 
 rm $path/sql/InsertStatements.sql
 touch $path/sql/InsertStatements.sql
